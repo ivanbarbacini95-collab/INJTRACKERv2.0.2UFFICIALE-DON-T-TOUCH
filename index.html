@@ -426,16 +426,24 @@
   <div class="settings-block-title">Backup (per wallet)</div>
 
   <div class="settings-row">
-    <div class="settings-label">Local backup</div>
+    <div class="settings-label">Local last</div>
     <div class="settings-value" id="backupLocalLast">—</div>
   </div>
 
   <div class="settings-row">
-    <div class="settings-label">Cloud backup</div>
+    <div class="settings-label">Cloud</div>
     <div class="settings-value">
       <span id="backupCloudState">—</span>
-      <span class="muted"> • </span>
+      <span class="muted">•</span>
       <span id="backupCloudLast">—</span>
+    </div>
+  </div>
+
+  <div class="settings-row">
+    <div class="settings-label">Cloud API base</div>
+    <div class="settings-value backup-api-row">
+      <input id="apiBaseInput" class="settings-input" placeholder="https://your-app.vercel.app" />
+      <button class="mini-btn" id="apiBaseSaveBtn" type="button">Save</button>
     </div>
   </div>
 
@@ -446,10 +454,7 @@
     </div>
   </div>
 
-  <div class="settings-row">
-    <div class="settings-label">Note</div>
-    <div class="settings-value" id="backupNote">—</div>
-  </div>
+  <div class="settings-note" id="backupNote">—</div>
 </div>
 
 <div class="settings-card" id="cardLayoutSettings"><div class="settings-block-title">Card layout</div><div class="settings-muted">Sposta le card con le frecce, poi premi Apply. L'ordine viene salvato sul dispositivo.</div><div class="card-order-list" id="cardOrderList"></div><div class="card-order-actions"><button class="mini-btn" id="cardOrderReset" type="button">Reset</button><button class="mini-btn primary" id="cardOrderApply" type="button">Apply</button></div><div class="settings-note" id="cardOrderNote">—</div></div><div class="settings-accordion" id="advAcc">
