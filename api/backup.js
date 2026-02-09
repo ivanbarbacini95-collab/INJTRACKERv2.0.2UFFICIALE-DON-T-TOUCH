@@ -1,112 +1,115 @@
 // /api/backup.js
+// Per-wallet snapshot backup using Vercel Blob.
+// Requires: "@vercel/blob" in package.json dependencies.
+
 import { put, list, del } from "@vercel/blob";
 
-const MAX_BODY_BYTES = 950_000;   // snapshot può essere più grande dei points
-const MAX_KEEP = 30;             // quante snapshot mantenere per address
-const PREFIX_VER = "inj_backup/v1";
+const MAX_BODY_BYTES = 320_000;   // keep payloads bounded
+const MAX_ITEMS_PER_ADDR = 40;    // prevent unbounded storage growth
 
-function json(res, code, obj) {
+function json(res, code, obj){
   res.statusCode = code;
   res.setHeader("Content-Type", "application/json; charset=utf-8");
+  res.setHeader("Cache-Control", "no-store");
   res.end(JSON.stringify(obj));
 }
 
-function normalizeAddr(a) {
+function normalizeAddr(a){
   const s = String(a || "").trim();
-  if (!/^inj[a-z0-9]{20,80}$/i.test(s)) return "";
-  return s;
+  return /^inj[a-z0-9]{20,80}$/i.test(s) ? s : "";
 }
 
-async function readBody(req) {
-  // Vercel spesso fa già parsing JSON, ma gestiamo entrambi
-  if (req.body && typeof req.body === "object") return req.body;
-
-  const chunks = [];
-  let size = 0;
-  for await (const c of req) {
-    size += c.length;
-    if (size > MAX_BODY_BYTES) throw new Error("BodyTooLarge");
-    chunks.push(c);
-  }
-  const raw = Buffer.concat(chunks).toString("utf-8");
-  return raw ? JSON.parse(raw) : null;
+async function readBlobJSON(url){
+  const r = await fetch(url, { cache:"no-store" });
+  if (!r.ok) throw new Error("fetch blob failed");
+  const txt = await r.text();
+  try{ return JSON.parse(txt); } catch { return null; }
 }
 
-export default async function handler(req, res) {
-  try {
-    const { address } = req.query || {};
-    const addr = normalizeAddr(address);
+export default async function handler(req, res){
+  try{
+    const addr = normalizeAddr(req.query?.address);
+    if (!addr) return json(res, 400, { ok:false, error:"invalid address" });
 
-    if (!addr) {
-      return json(res, 400, { ok: false, error: "Invalid address" });
-    }
+    const prefix = `inj-backup/${addr}/`;
 
-    const prefix = `${PREFIX_VER}/${addr}/`;
+    if (req.method === "GET"){
+      const ls = await list({ prefix, limit: 200 });
+      const blobs = (ls?.blobs || []).slice();
 
-    // ---------- GET: ritorna l’ultima snapshot ----------
-    if (req.method === "GET") {
-      const { blobs } = await list({ prefix, limit: 1000 });
-
-      if (!blobs || !blobs.length) {
-        return json(res, 200, { ok: true, data: null, meta: { uploadedAt: 0 } });
+      if (!blobs.length){
+        return json(res, 200, { ok:true, meta:{ uploadedAt:0 }, data:null });
       }
 
-      // scegli la più recente tramite uploadedAt
-      blobs.sort((a, b) => new Date(b.uploadedAt) - new Date(a.uploadedAt));
+      // pick latest by uploadedAt (fallback: by pathname ts)
+      blobs.sort((a,b) => {
+        const at = +new Date(a.uploadedAt || 0);
+        const bt = +new Date(b.uploadedAt || 0);
+        return bt - at;
+      });
       const latest = blobs[0];
 
-      // contenuto: fetch dal blob url (non esiste get() nello SDK)
-      const r = await fetch(latest.url, { cache: "no-store" });
-      if (!r.ok) {
-        return json(res, 500, { ok: false, error: "BlobFetchFailed" });
-      }
-      const data = await r.json();
-
+      const data = await readBlobJSON(latest.url);
       return json(res, 200, {
-        ok: true,
-        data,
-        meta: { uploadedAt: new Date(latest.uploadedAt).getTime() }
+        ok:true,
+        meta:{ uploadedAt: +new Date(latest.uploadedAt || 0), pathname: latest.pathname },
+        data
       });
     }
 
-    // ---------- POST: salva una nuova snapshot ----------
-    if (req.method === "POST") {
-      const payload = await readBody(req);
+    if (req.method === "POST"){
+      // body size guard
+      let raw = "";
+      await new Promise((resolve, reject) => {
+        req.on("data", (chunk) => {
+          raw += chunk;
+          if (raw.length > MAX_BODY_BYTES){
+            reject(new Error("body too large"));
+            try{ req.destroy(); } catch {}
+          }
+        });
+        req.on("end", resolve);
+        req.on("error", reject);
+      });
 
-      // sicurezza minima
-      if (!payload || payload.address !== addr) {
-        return json(res, 400, { ok: false, error: "Payload/address mismatch" });
+      let snap = null;
+      try{ snap = JSON.parse(raw || "{}"); } catch { snap = null; }
+      if (!snap || typeof snap !== "object") return json(res, 400, { ok:false, error:"invalid json" });
+
+      if (normalizeAddr(snap.address) !== addr){
+        return json(res, 400, { ok:false, error:"address mismatch" });
+      }
+      if (!snap.stores || typeof snap.stores !== "object"){
+        return json(res, 400, { ok:false, error:"missing stores" });
       }
 
-      const ts = Date.now();
+      const ts = Number(snap.ts || Date.now());
       const pathname = `${prefix}${ts}.json`;
 
-      const blob = await put(pathname, JSON.stringify(payload), {
+      const putRes = await put(pathname, JSON.stringify(snap), {
         access: "public",
-        addRandomSuffix: true,
-        contentType: "application/json"
+        contentType: "application/json",
+        addRandomSuffix: true
       });
 
-      // prune vecchi backup
-      const { blobs } = await list({ prefix, limit: 1000 });
-      if (blobs && blobs.length > MAX_KEEP) {
-        blobs.sort((a, b) => new Date(b.uploadedAt) - new Date(a.uploadedAt));
-        const toDelete = blobs.slice(MAX_KEEP).map(b => b.url);
-        if (toDelete.length) await del(toDelete);
-      }
+      // cleanup: keep latest MAX_ITEMS_PER_ADDR
+      try{
+        const ls = await list({ prefix, limit: 200 });
+        const blobs = (ls?.blobs || []).slice();
+        blobs.sort((a,b) => +new Date(b.uploadedAt || 0) - +new Date(a.uploadedAt || 0));
+        const toDelete = blobs.slice(MAX_ITEMS_PER_ADDR);
+        for (const b of toDelete){
+          try{ await del(b.url); } catch {}
+        }
+      }catch{}
 
-      return json(res, 200, {
-        ok: true,
-        meta: { uploadedAt: ts, url: blob.url }
-      });
+      return json(res, 200, { ok:true, meta:{ uploadedAt: Date.now(), url: putRes?.url || "" } });
     }
 
-    return json(res, 405, { ok: false, error: "Method not allowed" });
-  } catch (e) {
-    const msg = String(e?.message || e);
-    if (msg.includes("BodyTooLarge")) {
-      return json(res, 413, { ok: false, error: "Snapshot too large" });
-    }
-    return json(res, 500, { ok: false, error: msg });
+    res.setHeader("Allow", "GET, POST");
+    return json(res, 405, { ok:false, error:"method not allowed" });
+
+  } catch (e){
+    return json(res, 500, { ok:false, error: String(e?.message || e) });
   }
 }
