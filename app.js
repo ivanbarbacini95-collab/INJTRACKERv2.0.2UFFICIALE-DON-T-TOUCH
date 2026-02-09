@@ -66,8 +66,22 @@ const NW_MAX_POINTS = 24000;
 /* Net Worth live window */
 const NW_LIVE_WINDOW_MS = 15 * 60 * 1000; // ✅ 15 minutes live window
 
+/* api base (allow running from github pages too) */
+const VERCEL_ORIGIN_FALLBACK = "https://injtracke-rv2-0-2-official.vercel.app";
+const API_BASE = (() => {
+  try {
+    const h = location.hostname || "";
+    const override = (localStorage.getItem("inj_api_base") || "").trim();
+    if (override) return override.replace(/\/$/, "");
+    if (h.endsWith(".vercel.app") || h === "localhost" || h === "127.0.0.1") return location.origin;
+    return VERCEL_ORIGIN_FALLBACK;
+  } catch {
+    return VERCEL_ORIGIN_FALLBACK;
+  }
+})();
+
 /* cloud */
-const CLOUD_API = "/api/point";
+const CLOUD_API = `${API_BASE}/api/point`;
 const CLOUD_PUSH_DEBOUNCE_MS = 1200;
 const CLOUD_PULL_INTERVAL_MS = 45_000;
 const CLOUD_FAIL_COOLDOWN_MS = 120_000;
@@ -75,7 +89,7 @@ let cloudLastFailAt = 0;
 
 /* backup (per-address snapshots) */
 const BACKUP_VER = 1;
-const BACKUP_API = "/api/backup";
+const BACKUP_API = `${API_BASE}/api/backup`;
 const BACKUP_LOCAL_KEY_PREFIX = `inj_backup_v${BACKUP_VER}_`;
 const BACKUP_META_KEY_PREFIX  = `inj_backupmeta_v${BACKUP_VER}_`;
 const BACKUP_PUSH_DEBOUNCE_MS = 2200;
@@ -3017,7 +3031,9 @@ function backupRenderUI(){
   setText("backupLocalLast", fmtWhen(meta.localLastAt));
   setText("backupCloudState", meta.cloudState || (hasInternet() ? "—" : "OFFLINE"));
   setText("backupCloudLast", fmtWhen(meta.cloudLastAt));
-  setText("backupNote", meta.note || "Snapshot includes Stake / Rewards / Net Worth / APR / Events + targets.");
+    const baseNote = meta.note || "Snapshot includes Stake / Rewards / Net Worth / APR / Events + targets.";
+  const errNote = meta.cloudLastErr ? ("Last cloud error: " + meta.cloudLastErr) : "";
+  setText("backupNote", errNote ? (baseNote + " • " + errNote) : baseNote);
 }
 
 function backupCollectStores(addr){
@@ -3172,6 +3188,7 @@ async function backupPush(force=false){
     const meta = backupLoadMeta(address);
     meta.cloudState = "SYNCED";
     meta.cloudLastAt = Number(j?.meta?.uploadedAt || Date.now());
+    meta.cloudLastErr = "";
     backupSaveMeta(address, meta);
     backupRenderUI();
     backupDirty = false;
@@ -3181,6 +3198,7 @@ async function backupPush(force=false){
     backupLastFailAt = Date.now();
     const meta = backupLoadMeta(address);
     meta.cloudState = "ERROR";
+    meta.cloudLastErr = (e && e.message) ? e.message : String(e || "error");
     backupSaveMeta(address, meta);
     backupRenderUI();
     return false;
