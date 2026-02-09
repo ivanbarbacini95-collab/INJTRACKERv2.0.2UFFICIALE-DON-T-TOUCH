@@ -1,33 +1,33 @@
-<!-- index.html — Injective Portfolio v2.0.2 (FULL FILE) -->
+<!&ndash;&ndash; index.html &mdash; Injective Portfolio v2.0.2 (FULL FILE) &ndash;&ndash;>
 <!DOCTYPE html>
 
 <html lang="it">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Injective • Portfolio</title>
+<title>Injective | Portfolio</title>
 <link href="style.css" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1"></script>
 <script defer="" src="app.js"></script>
 </head>
 <body>
-<!-- BACKDROP + DRAWER -->
+<!&ndash;&ndash; BACKDROP + DRAWER &ndash;&ndash;>
 <div aria-hidden="true" class="backdrop" id="backdrop"></div>
 <aside aria-hidden="true" class="drawer" id="drawer">
 <div class="drawer-top">
 <div class="drawer-title">Menu</div>
 <div class="drawer-toggles">
 <button aria-label="Privacy" class="toggle-btn" id="privacyToggle">
-<span id="privacyIcon">🙈</span>
+<span id="privacyIcon">&#128584;</span>
 </button>
 <button aria-label="Tema" class="toggle-btn" id="themeToggle">
-<span id="themeIcon">🌙</span>
+<span id="themeIcon">&#127769;</span>
 </button>
 <button aria-label="Live o Refresh" class="toggle-btn" id="liveToggle">
-<span id="liveIcon">📡</span>
+<span id="liveIcon">&#128225;</span>
 </button>
-<button aria-label="View mode (PRO/LITE)" class="toggle-btn" id="viewToggle"><span id="viewIcon">🧠</span></button>
+<button aria-label="View mode (PRO/LITE)" class="toggle-btn" id="viewToggle"><span id="viewIcon">&#129504;</span></button>
 </div>
 </div>
 <nav class="drawer-nav" id="drawerNav">
@@ -41,7 +41,7 @@
         <span class="nav-version">v2.0.2</span>
 </button>
 </nav>
-<!-- Footer menu: Mode + Cloud Sync -->
+<!&ndash;&ndash; Footer menu: Mode + Cloud Sync &ndash;&ndash;>
 <div class="drawer-foot">
 <div class="drawer-hint" id="modeHint">Mode: LIVE</div>
 <div class="drawer-meta">
@@ -53,38 +53,38 @@
 <span class="drawer-meta-label">Cloud Sync</span>
 <span class="drawer-meta-value">
 <span aria-hidden="true" class="cloud-dot" id="cloudMenuDot"></span>
-<span id="cloudMenuStatus">—</span>
+<span id="cloudMenuStatus">&mdash;</span>
 </span>
 </div>
 <div class="drawer-meta-row">
 <span class="drawer-meta-label">Last sync</span>
-<span class="drawer-meta-value" id="cloudMenuLast">—</span>
+<span class="drawer-meta-value" id="cloudMenuLast">&mdash;</span>
 </div>
 </div>
 </div>
 </aside>
-<!-- COMING SOON OVERLAY (per Home/Market) -->
+<!&ndash;&ndash; COMING SOON OVERLAY (per Home/Market) &ndash;&ndash;>
 <div aria-hidden="true" class="coming-soon" id="comingSoon">
 <div class="coming-card">
-<div class="coming-title" id="comingTitle">COMING SOON 🚀</div>
-<div class="coming-sub" id="comingSub">—</div>
+<div class="coming-title" id="comingTitle">COMING SOON &#128640;</div>
+<div class="coming-sub" id="comingSub">&mdash;</div>
 <button class="coming-close" id="comingClose" type="button">Chiudi</button>
 </div>
 </div>
-<!-- EVENT TOAST -->
+<!&ndash;&ndash; EVENT TOAST &ndash;&ndash;>
 <div aria-atomic="true" aria-live="polite" class="toast-host" id="toastHost"></div>
-<!-- APP ROOT -->
+<!&ndash;&ndash; APP ROOT &ndash;&ndash;>
 <div class="container loading" id="appRoot">
-<!-- HEADER -->
+<!&ndash;&ndash; HEADER &ndash;&ndash;>
 <div class="header">
 <div class="header-grid">
 <div class="header-left">
-<button aria-label="Menu" class="menu-btn" id="menuBtn">≡</button>
+<button aria-label="Menu" class="menu-btn" id="menuBtn">&#8801;</button>
 </div>
-<!-- TITOLO centrato -->
+<!&ndash;&ndash; TITOLO centrato &ndash;&ndash;>
 <div class="header-center">
 <h1 class="brand-title">
-<span class="title-full">Injective <span class="dot">•</span> Portfolio</span>
+<span class="title-full">Injective <span class="dot">|</span> Portfolio</span>
 <span aria-hidden="true" class="title-compact">I<span class="dot">.</span>B</span>
 </h1>
 <div class="subtitle" id="subtitle">Realtime staking &amp; rewards dashboard</div>
@@ -106,26 +106,26 @@
 </div>
 </div>
 </div>
-<!-- PAGES -->
+<!&ndash;&ndash; PAGES &ndash;&ndash;>
 <main class="pages" id="pages">
-<!-- ========== DASHBOARD PAGE ========== -->
+<!&ndash;&ndash; ========== DASHBOARD PAGE ========== &ndash;&ndash;>
 <section aria-hidden="false" class="page page-dashboard active" data-page="dashboard" id="pageDashboard">
 <div class="cards-wrapper">
-<!-- 1) NET WORTH -->
-<!-- Address (masked) + copy -->
+<!&ndash;&ndash; 1) NET WORTH &ndash;&ndash;>
+<!&ndash;&ndash; Address (masked) + copy &ndash;&ndash;>
 <div class="addr-top" id="addrTopRow" aria-hidden="true">
   <div class="addr-top-left">
     <span class="addr-top-label">Address</span>
-    <span class="addr-top-value" id="addrTopValue">—</span>
+    <span class="addr-top-value" id="addrTopValue">&mdash;</span>
   </div>
   <button class="addr-copy" id="copyAddrBtn" type="button" aria-label="Copy address" title="Copy address">
-    ⧉
+    &#10697;
   </button>
 </div>
 <div class="card networth-card networth-card" id="netWorthCard">
 <div class="networth-top">
 <div class="label networth-title">Net Worth</div>
-<button aria-label="Expand Net Worth" class="card-expand" id="nwExpand" type="button">⤢</button>
+<button aria-label="Expand Net Worth" class="card-expand" id="nwExpand" type="button">&#10530;</button>
 </div>
 <div class="networth-top2">
 <button aria-label="Scale toggle" class="nw-scale-btn" id="nwScaleToggle" type="button">LIN</button>
@@ -134,10 +134,10 @@
 <div class="networth-metrics">
 <span aria-hidden="true" id="nwScaleAnchor"></span>
 <div class="networth-usd private" id="netWorthUsd">$0.00</div>
-<div class="networth-pnl flat private" id="netWorthPnl">PnL: —</div>
+<div class="networth-pnl flat private" id="netWorthPnl">PnL: &mdash;</div>
 </div>
 <div class="networth-chart">
-<div class="chart-readout private" id="nwReadout">—</div>
+<div class="chart-readout private" id="nwReadout">&mdash;</div>
 <canvas id="netWorthChart"></canvas>
 </div>
 <div class="networth-tf">
@@ -151,7 +151,7 @@
 </div>
 </div>
 <div class="networth-foot">
-<!-- SOLO: Total owned -->
+<!&ndash;&ndash; SOLO: Total owned &ndash;&ndash;>
 <div class="nw-mini nw-mini-single">
 <div class="nw-mini-left">
 <img alt="INJ" class="nw-coin-logo-img" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Injective_l.png"/>
@@ -166,55 +166,55 @@
 </div>
 </div>
 </div>
-<!-- 2) AVAILABLE -->
+<!&ndash;&ndash; 2) AVAILABLE &ndash;&ndash;>
 <div class="card available-card" id="availableCard">
 <div class="label">Available</div>
 <div class="value-row"><span class="private" id="available">0.000000</span></div>
-<div class="sub-row private" id="availableUsd">≈ $0.00</div>
+<div class="sub-row private" id="availableUsd">&#8776; $0.00</div>
 </div>
-<!-- 3) STAKED -->
+<!&ndash;&ndash; 3) STAKED &ndash;&ndash;>
 <div class="card stake-card staked-card" id="stakedCard">
 <div class="label">Staked</div>
 <div class="value-row"><span class="private" id="stake">0.0000</span></div>
-<div class="sub-row private" id="stakeUsd">≈ $0.00</div>
+<div class="sub-row private" id="stakeUsd">&#8776; $0.00</div>
 <div class="stake-bar-container bar-container stake-container">
 <div class="bar-fill stake-fill" id="stakeBar"></div>
 <div class="bar-line" id="stakeLine"></div>
 <span class="bar-pct" id="stakePercent">0%</span>
 </div>
 <div class="bar-values stake-values">
-<button aria-label="Set stake target" class="target-gear" id="stakeTargetBtn" type="button">⚙️</button>
+<button aria-label="Set stake target" class="target-gear" id="stakeTargetBtn" type="button">&#9881;&#65039;</button>
 <span class="left" id="stakeMin">0</span>
 <span class="right" id="stakeMax">1000</span>
 </div>
 <div class="card-tools">
-<button aria-label="Expand Staked" class="card-expand" id="stakeExpand" type="button">⤢</button>
+<button aria-label="Expand Staked" class="card-expand" id="stakeExpand" type="button">&#10530;</button>
 </div>
 <div class="stake-chart-wrap">
-<div class="chart-readout" id="stakeReadout">—</div>
+<div class="chart-readout" id="stakeReadout">&mdash;</div>
 <canvas id="stakeChart"></canvas>
 </div>
 </div>
-<!-- 4) REWARDS -->
+<!&ndash;&ndash; 4) REWARDS &ndash;&ndash;>
 <div class="card reward-card rewards-card" id="rewardsCard">
 <div class="label">Rewards</div>
 <div class="value-row"><span class="private" id="rewards">0.0000000</span></div>
-<div class="sub-row private" id="rewardsUsd">≈ $0.00</div>
+<div class="sub-row private" id="rewardsUsd">&#8776; $0.00</div>
 <div class="reward-bar-container bar-container reward-container">
 <div class="bar-fill reward-fill" id="rewardBar"></div>
 <div class="bar-line" id="rewardLine"></div>
 <span class="bar-pct" id="rewardPercent">0%</span>
 </div>
 <div class="bar-values reward-values">
-<button aria-label="Set rewards target" class="target-gear" id="rewardTargetBtn" type="button">⚙️</button>
+<button aria-label="Set rewards target" class="target-gear" id="rewardTargetBtn" type="button">&#9881;&#65039;</button>
 <span class="left" id="rewardMin">0</span>
 <span class="right" id="rewardMax">0.1</span>
 </div>
 <div class="card-tools">
-<button aria-label="Expand Rewards" class="card-expand" id="rewardExpand" type="button">⤢</button>
+<button aria-label="Expand Rewards" class="card-expand" id="rewardExpand" type="button">&#10530;</button>
 </div>
 <div class="reward-chart-wrap">
-<div class="chart-readout" id="rewardReadout">—</div>
+<div class="chart-readout" id="rewardReadout">&mdash;</div>
 <canvas id="rewardChart"></canvas>
 </div>
 <div class="reward-tools">
@@ -223,54 +223,54 @@
 <span class="mini-select-label">Filtro</span>
 <select class="mini-select" id="rewardFilter">
 <option value="0">Tutti</option>
-<option value="0.01">≥ 0.01</option>
-<option value="0.05">≥ 0.05</option>
-<option value="0.1">≥ 0.1</option>
-<option value="0.2">≥ 0.2</option>
-<option value="0.3">≥ 0.3</option>
-<option value="0.4">≥ 0.4</option>
-<option value="0.5">≥ 0.5</option>
-<option value="0.6">≥ 0.6</option>
-<option value="0.7">≥ 0.7</option>
-<option value="0.8">≥ 0.8</option>
-<option value="0.9">≥ 0.9</option>
-<option value="1">≥ 1</option>
+<option value="0.01">&#8805; 0.01</option>
+<option value="0.05">&#8805; 0.05</option>
+<option value="0.1">&#8805; 0.1</option>
+<option value="0.2">&#8805; 0.2</option>
+<option value="0.3">&#8805; 0.3</option>
+<option value="0.4">&#8805; 0.4</option>
+<option value="0.5">&#8805; 0.5</option>
+<option value="0.6">&#8805; 0.6</option>
+<option value="0.7">&#8805; 0.7</option>
+<option value="0.8">&#8805; 0.8</option>
+<option value="0.9">&#8805; 0.9</option>
+<option value="1">&#8805; 1</option>
 </select>
 </div>
 </div>
 <div class="reward-timeline">
 <input id="rewardTimeline" max="0" min="0" type="range" value="0"/>
-<div class="reward-timeline-meta" id="rewardTimelineMeta">—</div>
+<div class="reward-timeline-meta" id="rewardTimelineMeta">&mdash;</div>
 </div>
-</div><div class="card totalreward-card" id="totalRewardsAccCard"><div class="label">Total Reward Accumulate</div><div class="value-row"><span class="private" id="totalRewardsAcc">0.000000</span></div><div class="sub-row private" id="totalRewardsAccUsd">≈ $0.00</div><div class="micro-hint">Total withdrawn rewards (auto)</div></div>
-<!-- 5) APR -->
+</div><div class="card totalreward-card" id="totalRewardsAccCard"><div class="label">Total Reward Accumulate</div><div class="value-row"><span class="private" id="totalRewardsAcc">0.000000</span></div><div class="sub-row private" id="totalRewardsAccUsd">&#8776; $0.00</div><div class="micro-hint">Total withdrawn rewards (auto)</div></div>
+<!&ndash;&ndash; 5) APR &ndash;&ndash;>
 <div class="card apr-card apr-card" id="aprCard">
 <div class="label">APR</div>
 <div class="card-tools">
-<button aria-label="Expand APR" class="card-expand" id="aprExpand" type="button">⤢</button>
+<button aria-label="Expand APR" class="card-expand" id="aprExpand" type="button">&#10530;</button>
 </div>
 <div class="value-row"><span id="apr">0%</span></div>
 <div class="apr-chart-wrap">
-<div class="chart-readout" id="aprReadout">—</div>
+<div class="chart-readout" id="aprReadout">&mdash;</div>
 <canvas id="aprChart"></canvas>
 </div>
 </div>
-<!-- 5B) VALIDATOR -->
+<!&ndash;&ndash; 5B) VALIDATOR &ndash;&ndash;>
 <div class="card validator-card validator-card" id="validatorCard">
 <div class="label">Validator</div>
-<div class="value-row"><span id="validatorName">—</span></div>
-<div class="sub-row" id="validatorMeta">—</div>
-<div class="sub-row validator-fees" id="validatorFeeLine">Fee tx: —</div>
+<div class="value-row"><span id="validatorName">&mdash;</span></div>
+<div class="sub-row" id="validatorMeta">&mdash;</div>
+<div class="sub-row validator-fees" id="validatorFeeLine">Fee tx: &mdash;</div>
 </div>
-<!-- 6) 1D PRICE CHART -->
+<!&ndash;&ndash; 6) 1D PRICE CHART &ndash;&ndash;>
 <div class="card pricechart-card" id="priceChartCard">
 <div class="label" id="priceChartTitle">1D Price Chart</div>
 <div class="card-tools">
 <button aria-label="Scala Price Chart" class="mini-btn" id="priceScaleToggle" type="button">LIN</button>
-<button aria-label="Expand 1D Price Chart" class="card-expand" id="priceChartExpand" type="button">⤢</button>
+<button aria-label="Expand 1D Price Chart" class="card-expand" id="priceChartExpand" type="button">&#10530;</button>
 </div>
 <div class="pricechart-chart">
-  <div class="chart-overlay" id="chartOverlay"><span id="chartPrice">--</span></div>
+  <div class="chart-overlay" id="chartOverlay"><span id="chartPrice">&ndash;&ndash;</span></div>
   <canvas id="priceChart"></canvas>
 </div>
 <div class="price-tf">
@@ -284,12 +284,12 @@
 </div>
 </div>
 </div>
-<!-- 7) INJ PRICE -->
+<!&ndash;&ndash; 7) INJ PRICE &ndash;&ndash;>
 <div class="card price-card injprice-card" id="injPriceCard">
 <div class="label">INJ Price</div>
 <div class="value-row"><span id="price">0.0000</span></div>
 <div class="sub-row perf">
-<span class="arrow" id="arrow24h">►</span>
+<span class="arrow" id="arrow24h"></span>
 <span class="pct" id="pct24h">0.00%</span>
 </div>
 <div class="price-bar-container bar-container">
@@ -299,12 +299,12 @@
 <div class="bar-line" id="priceLine"></div>
 </div>
 <div class="bar-values">
-<span class="left" id="priceMin">--</span>
-<span class="center" id="priceOpen">--</span>
-<span class="right" id="priceMax">--</span>
+<span class="left" id="priceMin">&ndash;&ndash;</span>
+<span class="center" id="priceOpen">&ndash;&ndash;</span>
+<span class="right" id="priceMax">&ndash;&ndash;</span>
 </div>
 <div class="sub-row perf">
-<span class="arrow" id="arrowWeek">►</span>
+<span class="arrow" id="arrowWeek"></span>
 <span class="pct" id="pctWeek">0.00%</span>
 </div>
 <div class="week-bar-container bar-container">
@@ -314,12 +314,12 @@
 <div class="bar-line" id="weekLine"></div>
 </div>
 <div class="bar-values">
-<span class="left" id="weekMin">--</span>
-<span class="center" id="weekOpen">--</span>
-<span class="right" id="weekMax">--</span>
+<span class="left" id="weekMin">&ndash;&ndash;</span>
+<span class="center" id="weekOpen">&ndash;&ndash;</span>
+<span class="right" id="weekMax">&ndash;&ndash;</span>
 </div>
 <div class="sub-row perf">
-<span class="arrow" id="arrowMonth">►</span>
+<span class="arrow" id="arrowMonth"></span>
 <span class="pct" id="pctMonth">0.00%</span>
 </div>
 <div class="month-bar-container bar-container">
@@ -329,13 +329,13 @@
 <div class="bar-line" id="monthLine"></div>
 </div>
 <div class="bar-values">
-<span class="left" id="monthMin">--</span>
-<span class="center" id="monthOpen">--</span>
-<span class="right" id="monthMax">--</span>
+<span class="left" id="monthMin">&ndash;&ndash;</span>
+<span class="center" id="monthOpen">&ndash;&ndash;</span>
+<span class="right" id="monthMax">&ndash;&ndash;</span>
 </div>
 
 <div class="sub-row perf">
-  <span class="arrow" id="arrowYear">►</span>
+  <span class="arrow" id="arrowYear"></span>
   <span class="pct" id="pctYear">0.00%</span>
 </div>
 <div class="year-bar-container bar-container">
@@ -345,14 +345,14 @@
   <div class="bar-line" id="yearLine"></div>
 </div>
 <div class="bar-values">
-  <span class="left" id="yearMin">--</span>
-  <span class="center" id="yearOpen">--</span>
-  <span class="right" id="yearMax">--</span>
+  <span class="left" id="yearMin">&ndash;&ndash;</span>
+  <span class="center" id="yearOpen">&ndash;&ndash;</span>
+  <span class="right" id="yearMax">&ndash;&ndash;</span>
 </div>
 </div>
 </div>
 </section>
-<!-- ========== EVENTS PAGE ========== -->
+<!&ndash;&ndash; ========== EVENTS PAGE ========== &ndash;&ndash;>
 <section aria-hidden="true" class="page page-events" data-page="event" id="pageEvents">
 <div class="events-head">
 <div class="events-title">
@@ -363,7 +363,7 @@
 </div>
 <div class="events-card">
 <div class="events-toolbar">
-<input autocomplete="off" class="events-search" id="eventsSearch" placeholder="Search event…" type="text"/>
+<input autocomplete="off" class="events-search" id="eventsSearch" placeholder="Search event..." type="text"/>
 <select aria-label="Kind" class="events-select" id="eventsKind">
 <option value="all">All</option>
 <option value="tx">TX</option>
@@ -399,7 +399,7 @@
           </div>
 </div>
 </section>
-<!-- ========== SETTINGS PAGE ========== -->
+<!&ndash;&ndash; ========== SETTINGS PAGE ========== &ndash;&ndash;>
 <section aria-hidden="true" class="page page-settings" data-page="settings" id="pageSettings">
 <div class="settings-head">
 <div class="settings-title">
@@ -410,32 +410,31 @@
 <div class="settings-card">
 <div class="settings-row">
 <div class="settings-label">Theme</div>
-<div class="settings-value" id="settingsTheme">—</div>
+<div class="settings-value" id="settingsTheme">&mdash;</div>
 </div>
 <div class="settings-row">
 <div class="settings-label">Mode</div>
-<div class="settings-value" id="settingsMode">—</div>
+<div class="settings-value" id="settingsMode">&mdash;</div>
 </div>
 <div class="settings-row">
 <div class="settings-label">Active wallet</div>
-<div class="settings-value" id="settingsWallet">—</div>
+<div class="settings-value" id="settingsWallet">&mdash;</div>
 </div>
 </div>
-
 <div class="settings-card" id="backupSettingsCard">
   <div class="settings-block-title">Backup (per wallet)</div>
 
   <div class="settings-row">
     <div class="settings-label">Local last</div>
-    <div class="settings-value" id="backupLocalLast">—</div>
+    <div class="settings-value" id="backupLocalLast">&ndash;&ndash;</div>
   </div>
 
   <div class="settings-row">
     <div class="settings-label">Cloud</div>
     <div class="settings-value">
-      <span id="backupCloudState">—</span>
-      <span class="muted">•</span>
-      <span id="backupCloudLast">—</span>
+      <span id="backupCloudState">&ndash;&ndash;</span>
+      <span class="muted"> | </span>
+      <span id="backupCloudLast">&ndash;&ndash;</span>
     </div>
   </div>
 
@@ -448,19 +447,22 @@
   </div>
 
   <div class="settings-row">
+    <div class="settings-label">Note</div>
+    <div class="settings-value" id="backupNote">&ndash;&ndash;</div>
+  </div>
+
+  <div class="settings-row">
     <div class="settings-label">Action</div>
     <div class="settings-value">
       <button class="mini-btn" id="backupNowBtn" type="button">Backup now</button>
     </div>
   </div>
-
-  <div class="settings-note" id="backupNote">—</div>
 </div>
 
-<div class="settings-card" id="cardLayoutSettings"><div class="settings-block-title">Card layout</div><div class="settings-muted">Sposta le card con le frecce, poi premi Apply. L'ordine viene salvato sul dispositivo.</div><div class="card-order-list" id="cardOrderList"></div><div class="card-order-actions"><button class="mini-btn" id="cardOrderReset" type="button">Reset</button><button class="mini-btn primary" id="cardOrderApply" type="button">Apply</button></div><div class="settings-note" id="cardOrderNote">—</div></div><div class="settings-accordion" id="advAcc">
+<div class="settings-card" id="cardLayoutSettings"><div class="settings-block-title">Card layout</div><div class="settings-muted">Sposta le card con le frecce, poi premi Apply. L'ordine viene salvato sul dispositivo.</div><div class="card-order-list" id="cardOrderList"></div><div class="card-order-actions"><button class="mini-btn" id="cardOrderReset" type="button">Reset</button><button class="mini-btn primary" id="cardOrderApply" type="button">Apply</button></div><div class="settings-note" id="cardOrderNote">&mdash;</div></div><div class="settings-accordion" id="advAcc">
 <button aria-expanded="false" class="acc-head" id="advAccBtn" type="button">
 <span>Advanced settings</span>
-<span aria-hidden="true" class="acc-caret">▾</span>
+<span aria-hidden="true" class="acc-caret">&#9662;</span>
 </button>
 <div aria-hidden="true" class="acc-body" id="advAccBody">
 <div class="settings-card">
@@ -468,14 +470,14 @@
 <div class="cloud-monitor">
 <div aria-hidden="true" class="cloud-dot-big" id="cloudAdvDot"></div>
 <div class="cloud-monitor-main">
-<div class="cloud-monitor-state" id="cloudAdvState">—</div>
+<div class="cloud-monitor-state" id="cloudAdvState">&mdash;</div>
 <div class="cloud-monitor-sub">
-<span>Last sync:</span> <span id="cloudAdvLast">—</span>
-<span class="sep">•</span>
-<span>Points:</span> <span id="cloudAdvPts">—</span>
+<span>Last sync:</span> <span id="cloudAdvLast">&mdash;</span>
+<span class="sep">|</span>
+<span>Points:</span> <span id="cloudAdvPts">&mdash;</span>
 </div>
 <div class="cloud-monitor-sub2">
-<span>Syncing:</span> <span id="cloudAdvWhat">—</span>
+<span>Syncing:</span> <span id="cloudAdvWhat">&mdash;</span>
 </div>
 </div>
 </div>
@@ -484,50 +486,50 @@
 <div class="settings-block-title">Device &amp; Network</div>
 <div class="settings-row">
 <div class="settings-label">Public IP</div>
-<div class="settings-value" id="deviceIp">—</div>
+<div class="settings-value" id="deviceIp">&mdash;</div>
 </div>
 <div class="settings-row">
 <div class="settings-label">Timezone</div>
-<div class="settings-value" id="deviceTz">—</div>
+<div class="settings-value" id="deviceTz">&mdash;</div>
 </div>
 <div class="settings-row">
 <div class="settings-label">Language</div>
-<div class="settings-value" id="deviceLang">—</div>
+<div class="settings-value" id="deviceLang">&mdash;</div>
 </div>
 <div class="settings-row">
 <div class="settings-label">Platform</div>
-<div class="settings-value" id="devicePlatform">—</div>
+<div class="settings-value" id="devicePlatform">&mdash;</div>
 </div>
 <div class="settings-row">
 <div class="settings-label">Screen</div>
-<div class="settings-value" id="deviceScreen">—</div>
+<div class="settings-value" id="deviceScreen">&mdash;</div>
 </div>
 <div class="settings-row">
 <div class="settings-label">Connection</div>
-<div class="settings-value" id="deviceConn">—</div>
+<div class="settings-value" id="deviceConn">&mdash;</div>
 </div>
 </div>
 </div>
 </div>
 </section>
 </main>
-<div class="last-update" id="updated">Last update: --:--</div>
+<div class="last-update" id="updated">Last update: &ndash;&ndash;:&ndash;&ndash;</div>
 <div class="pro-footer" id="proFooter">
 <span class="pro-pill">INJ Portfolio</span>
-<span class="pro-dot">•</span>
+<span class="pro-dot">|</span>
 <span class="pro-meta">v2.0.2</span>
-<span class="pro-dot">•</span>
-<span class="pro-meta" id="cloudStatus">Cloud: —</span>
-<span class="pro-meta cloud-points" id="cloudHistory">· 0 pts</span>
+<span class="pro-dot">|</span>
+<span class="pro-meta" id="cloudStatus">Cloud: &mdash;</span>
+<span class="pro-meta cloud-points" id="cloudHistory">&middot; 0 pts</span>
 </div>
 </div>
-<!-- TARGET MODAL -->
+<!&ndash;&ndash; TARGET MODAL &ndash;&ndash;>
 <div aria-hidden="true" class="modal" id="targetModal">
 <div class="modal-backdrop" id="targetBackdrop"></div>
 <div aria-labelledby="targetTitle" aria-modal="true" class="modal-card" role="dialog">
 <div class="modal-head">
 <div class="modal-title" id="targetTitle">Set target</div>
-<button aria-label="Close" class="modal-close" id="targetClose" type="button">✕</button>
+<button aria-label="Close" class="modal-close" id="targetClose" type="button">&#10005;</button>
 </div>
 <div class="modal-body">
 <div class="modal-row">
@@ -541,6 +543,6 @@
 </div>
 </div>
 
-<footer class="app-footer" id="copyrightFooter">Copyright © I.B</footer>
+<footer class="app-footer" id="copyrightFooter">Copyright &#169; I.B</footer>
 </body>
 </html>
