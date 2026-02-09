@@ -1685,11 +1685,38 @@ body[data-theme="light"] .bar-pct{ color: rgba(15,23,42,.92); text-shadow:none; 
 }
 
 /* ===== BACKUP SETTINGS ===== */
+.settings-input{
+  width: 240px;
+  max-width: 60vw;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  color: inherit;
+  border-radius: 12px;
+  padding: 8px 10px;
+  outline: none;
+}
+body[data-theme="light"] .settings-input{
+  background: rgba(15,23,42,.05);
+  border-color: rgba(15,23,42,.14);
+}
+.backup-api-row{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
 #backupSettingsCard .settings-value{
   display:flex;
   justify-content:flex-end;
-  gap:8px;
-  flex-wrap:wrap;
+  gap: 8px;
+  flex-wrap: wrap;
   text-align:right;
 }
-#backupSettingsCard #backupNowBtn{ white-space:nowrap; }
+#backupNote{
+  margin-top: 10px;
+  font-size: .9rem;
+  opacity: .82;
+  line-height: 1.35;
+  word-break: break-word;
+}
