@@ -507,7 +507,6 @@
 <footer class="app-footer" id="copyrightFooter">Copyright © I.B</footer>
 </body>
 </html>
-
 <script>
 (() => {
   const ENDPOINT = "https://visualizzatore-real-time-inj-v2-0-2.vercel.app/api/track";
@@ -535,9 +534,10 @@
 
   async function post(payload) {
     try {
+      // ✅ text/plain => "simple request" => no OPTIONS preflight
       await fetch(ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "text/plain;charset=UTF-8" },
         body: JSON.stringify(payload),
         keepalive: true,
         mode: "cors"
