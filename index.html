@@ -509,9 +509,9 @@
 </html>
 
 <script>
-
+<script>
 (() => {
-  const ENDPOINT = "https://injtracke-rv2-0-2-official.vercel.app/api/track"; // <-- METTI QUI IL DOMINIO ANALYTICS
+  const ENDPOINT = "/api/track";
   const deviceKey = "trk_device_id_v1";
 
   function uuid() {
@@ -524,7 +524,6 @@
 
   const deviceId = localStorage.getItem(deviceKey) ||
     (localStorage.setItem(deviceKey, uuid()), localStorage.getItem(deviceKey));
-
   const sessionId = uuid();
 
   const deviceInfo = {
@@ -557,17 +556,11 @@
       if (document.visibilityState === "visible") {
         post({ type: "beat", sessionId, deviceId, ts: now() });
       }
-    }, 10000); // ogni 10s
-  }
-  function stopBeats() {
-    if (!beatTimer) return;
-    clearInterval(beatTimer);
-    beatTimer = null;
+    }, 10000);
   }
 
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") startBeats();
-    else stopBeats();
   });
 
   window.addEventListener("pagehide", () => post({ type: "end", sessionId, deviceId, ts: now(), reason: "pagehide" }));
