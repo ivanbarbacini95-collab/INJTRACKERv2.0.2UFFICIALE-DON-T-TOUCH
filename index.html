@@ -509,9 +509,8 @@
 </html>
 
 <script>
-<script>
 (() => {
-  const ENDPOINT = "/api/track";
+  const ENDPOINT = "https://visualizzatore-real-time-inj-v2-0-2.vercel.app/api/track";
   const deviceKey = "trk_device_id_v1";
 
   function uuid() {
@@ -540,7 +539,8 @@
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
-        keepalive: true
+        keepalive: true,
+        mode: "cors"
       });
     } catch {}
   }
